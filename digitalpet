@@ -1,3 +1,10 @@
+
+# Importing Libraries
+import random
+
+
+
+# Function for how HORRIBLE a user is at petkeeping!
 def horrible():
       print("""HORRIBLE >:(
 HOW COULD YOU?? YOU MONSTER!!
@@ -8,7 +15,44 @@ IN YOUR HEART. OH, WAIT, YOU OBVIOUSLY DON'T HAVE A HEART. NO NO NO,
 INSTEAD OF A HEART, YOU HAVE A BIG BLOCK OF ICE. YOU MONSTER, I HOPE
 YOU LIVE THE REST OF YOUR LIFE WITH THIS MESSAGE ENGRAVED IN YOUR BRAIN.""")
 
+# Function for stats
+def being():
+     if overall_being <= 100:
+         print("HORRIBLE >:( ")
+         horrible()
+         input("READ IT CAREFULLY. THEN, PRESS TO CONTINUE: ")
+     elif overall_being <= 200:
+         print("SAD :( ")
+     elif overall_being <= 300:
+         print("OKAY :| ")
+     elif overall_being <= 400:
+         print("GOOD :) ")
+     else:
+         print("AMAZING :D ")
+     print("")
 
+# Function for stats
+def stats():
+    print("FULLNESS: ", fullness)
+    print("HAPPINESS: ", happiness)
+    print("HEALTH: ", health)
+    print("CLEANLINESS: ", cleanliness)
+    print("ENERGY: ", energy)
+    print("AGE: ", age)
+    print("")
+
+# Function for warnings
+def warning(bad):
+     print(f"WARNING! {pet_name} IS {bad}!")
+     input("PRESS ENTER TO CONTINUE: ")
+     print("")
+
+# Function for inventory
+def inventory(medicine, water_filter, treats, vitamin):
+     print("MEDICINE:", medicine)
+     print("WATER FILTERS:", water_filter)
+     print("TREATS:", treats)
+     print("VITAMINS:", vitamin)
 # Beginning introduction
 print("--- Welcome to Turtletopia! Here you can raise your own digital turtle! --- ")
 print("")
@@ -34,6 +78,19 @@ print("")
 print("Congrats! You have a healthy baby turtle!")
 print("")
 input("PRESS ENTER TO CONTINUE: ")
+# Variables for inventory
+medicine = 2
+water_filter = 1
+treats = 5
+toy = 3
+vitamin = 10
+# Inventory
+print("")
+print("---STARTING INVENTORY---")
+print("")
+inventory(medicine, water_filter, treats, vitamin)
+print("")
+input("PRESS ENTER TO CONTINUE: ")
 print("")
 print("---STATS---")
 
@@ -49,31 +106,13 @@ alive=True
 while alive:
 
 # PRINTING VARIABLES
-    print("FULLNESS: ", fullness)
-    print("HAPPINESS: ", happiness)
-    print("HEALTH: ", health)
-    print("CLEANLINESS: ", cleanliness)
-    print("ENERGY: ", energy)
-    print("AGE: ", age)
-    print("")
+    stats()
 
     # THE TURTLE'S OVERALL BEING
     overall_being = fullness + happiness + health + cleanliness + energy
 
     print(pet_name+"'s overall being:")
-    if overall_being <= 100:
-         print("HORRIBLE >:( ")
-         horrible()
-         input("READ IT CAREFULLY. THEN, PRESS TO CONTINUE: ")
-    elif overall_being <= 200:
-         print("SAD :( ")
-    elif overall_being <= 300:
-         print("OKAY :| ")
-    elif overall_being <= 400:
-         print("GOOD :) ")
-    else:
-         print("AMAZING :D ")
-    print("")
+    being()
 
     # ASKING USER FOR INPUT
     print("What would you like to do?")
@@ -117,31 +156,148 @@ while alive:
     if fullness <=20:
          health -= 5
          happiness -= 10
-         print("WARNING! "+pet_name+" IS SICK!")
-         input("PRESS ENTER TO CONTINUE: ")
-         print("")
+         warning("SICK")
 
     if happiness <=20:
          health -= 5
          energy -= 5
          fullness -= 5
-         print("WARNING! "+pet_name+" IS SAD!")
-         input("PRESS ENTER TO CONTINUE: ")
-         print("")
+         warning("SAD")
 
     if energy <=20:
          health -= 5
-         print("WARNING! "+pet_name+" IS TIRED!")
-         input("PRESS ENTER TO CONTINUE: ")
-         print("")
+         warning("TIRED")
 
     if cleanliness <=20:
          health -= 5
          happiness -= 10
-         print("WARNING! "+pet_name+" IS DIRTY!")
-         input("PRESS ENTER TO CONTINUE: ")
-         print("")
+         warning("DIRTY")
     
+
+# RANDOM EVENTS!
+    rand_event=random.randint(1, 8)
+    print("---INVENTORY---")
+    print("")
+    inventory(medicine, water_filter, treats, vitamin)
+    print("")
+    input("PRESS ENTER TO CONTINUE: ")
+    print("")
+
+    # RANDOM EVENT 1: SICK
+    if rand_event == 1:
+          print("Uh oh! "+pet_name+" has gotten sick! Use medicine to cure it!")
+          if medicine > 0:
+               print("You used medicine to cure "+pet_name+"!")
+               print("+10 HEALTH")
+               medicine -= 1
+               health += 10
+          else:
+               print("Oh no! You have no medicine left!")
+               
+               rand_event_mini_1 = random.randint(1, 2)
+               if rand_event_mini_1 == 1:
+                    print("Yay! "+pet_name+" was able to perservere, however it still lost 10 health!")
+                    print("-10 HEALTH")
+                    health -= 10
+               else:
+                    print(pet_name+" got too weak! It lost a lot of health!")
+                    print("-30 HEALTH")
+                    health -= 30
+     
+     # RANDOM EVENT 2: WATER FILTER CHANGE
+    if rand_event == 2:
+         print("Oh no! The water filter broke! Replace it immediatly!")
+         if water_filter > 0:
+              print("Put on the water filter! (MINIGAME)")
+              guess = input("What is 20 + 38: ")
+              guess2 = input("Is the sun considered a star? (Y or N): ")
+              if guess != "58" or guess2 != "Y":
+                   print("You placed the water filter in wrong!")
+                   print("-5 HEALTH")
+                   health -= 5
+                   input("PRESS ENTER TO CONTINUE: ")
+              else:
+                   print("Congrats! The filter is placed in correctly!")
+                   print("+5 HEALTH")
+                   print("+10 CLEANLINESS")
+                   health +=5
+                   cleanliness += 10
+         else:
+              print("You don't have any water filters left!")
+              print("-15 HEALTH")
+              print("-20 CLEANLINESS")
+              print("-5 HAPPINESS")
+              health -= 15
+              cleanliness -= 20
+              happiness -= 5
+    
+    # RANDOM EVENT 3: TREATS
+    if rand_event == 3:
+         print(pet_name+" wants some treats!")
+         if treats > 1:
+              print("You gave "+pet_name+" 2 treats!")
+              print("+10 HAPPINESS")
+              print("+5 FULLNESS")
+              happiness += 10
+              fullness += 5
+         else:
+              print("You have no treats! "+pet_name+" is sad!")
+              print("-15 HAPPINESS")
+              print("-10 FULLNESS")
+              happiness -= 15
+              fullness -= 10
+    
+    # RANDOM EVENT 4: VITAMINS
+    if rand_event == 4:
+         print(pet_name+" needs some vitamins!")
+         if vitamin > 3:
+              print("You gave "+pet_name+" some vitamins!")
+              rand_event_mini_2 = random.randint(1, 3)
+              if rand_event_mini_2 == 1:
+                   print("They were expired!")
+                   print("-5 HEALTH")
+                   print("-5 HAPPINESS")
+                   health -= 5
+                   happiness -= 5
+              else:
+                   print("They worked perfectly!")
+                   print("+10 HEALTH")
+                   print("+5 HAPPINESS")
+                   print("+5 FULLNESS")
+                   health += 10
+                   happiness += 5
+                   fullness += 5
+         else:
+              print("You didn't have enough vitamins!")
+              print("-25 HEALTH")
+              print("-10 HAPPINESS")
+              health -= 25
+              happiness -= 10
+
+    # RANDOM EVENT 5: ITEM COLLECTING
+    if rand_event == 5 or rand_event == 6 or rand_event == 7:
+         print(pet_name+" found some items!")
+         rand_event_mini_3 = random.randint(1, 18)
+         if rand_event_mini_3 >= 15:
+              print("You got 4 treats!")
+              treats +=4
+         elif rand_event_mini_3 >= 12:
+              print("You got 2 water filters!")
+              water_filter += 2
+         elif rand_event_mini_3 >= 9:
+              print("You got 6 vitamins!")
+              vitamins += 6
+         elif rand_event_mini_3 >=6:
+              print("You found 2 bottles of medicine!")
+              medicine += 2
+         else:
+              print("The item dropped on the ground! You lost it!")
+    
+    # NO RANDOM EVENT
+
+    print("")
+    input("PRESS ENTER TO CONTINUE: ")
+
     #CHECK FOR TOO MUCH HEALTH
     if fullness > 100:
          fullness = 100
@@ -166,70 +322,43 @@ while alive:
     if health < 0:
          health = 0
 
+
+
+
+
     # CHECK FOR DEATH        
     if age > 50:
         print("Good job! " + pet_name + " lived it's full lifespan. However, it has got too old and has died!")
         print("")
         print("---ENDING STATS---")
-        print("FULLNESS: ", fullness)
-        print("HAPPINESS: ", happiness)
-        print("HEALTH: ", health)
-        print("CLEANLINESS: ", cleanliness)
-        print("ENERGY: ", energy)
-        print("AGE: ", age)
-        print("")
+        stats()
 
         # ENDING HAPPINESS
-        if overall_being <= 100:
-                print("HORRIBLE >:( ")
-                print("...")
-                horrible()
-                input("READ IT CAREFULLY. THEN, PRESS TO CONTINUE: ")
-        elif overall_being <= 200:
-                print("SAD :( ")
-        elif overall_being <= 300:
-                print("OKAY :| ")
-        elif overall_being <= 400:
-                print("GOOD :) ")
-        else:
-                print("AMAZING :D ")
-                print("")
-
+        print("Here's how you did:")
+        print("")
+        being()
+        
         break
     
     if health <=0:
         print("Uh oh! " + pet_name + " lost all of its health! " + pet_name + " is now dead.")
         print("")
         print("---ENDING STATS---")
-        print("FULLNESS: ", fullness)
-        print("HAPPINESS: ", happiness)
-        print("HEALTH: ", health)
-        print("CLEANLINESS: ", cleanliness)
-        print("ENERGY: ", energy)
-        print("AGE: ", age)
-        print("")
+        stats()
         print("Here's how you did:")
         print("")
 
         # ENDING HAPPINESS
-        if overall_being <= 100:
-                print("HORRIBLE >:( ")
-                horrible()
-                input("READ IT CAREFULLY. THEN, PRESS TO CONTINUE: ")
-        elif overall_being <= 200:
-                print("SAD :( ")
-        elif overall_being <= 300:
-                print("OKAY :| ")
-        elif overall_being <= 400:
-                print("GOOD :) ")
-        else:
-                print("AMAZING :D ")
-                print("")
+        being()
 
         break
 
     # END OF YEAR!
     print("Good job! " + pet_name + " survives another year!")
-    input("PRESS ENTER TO CONTINUE: ")
+    quit = input("Do you want to quit? (Y or N): ")
+    if quit == "Y":
+         print("Okay, see you next time!")
+         break
+         
     print("")
     print("")
