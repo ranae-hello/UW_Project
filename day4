@@ -1,0 +1,152 @@
+# Notes ish
+#number = int(input("Enter a number: "))
+#if number == 0 :
+#    print("The number is 0!!")
+#elif number % 2 == 0 :
+#    print("It is an even number!!")
+#elif number % 2 >=1 :
+#    print("It is an odd number!!")
+#number=False
+
+#hungry=True
+#hasPizza=False
+#if hungry:
+#    if hasPizza:
+#        print("eat the pizza bro")
+#    else:
+#        print("Make pizza dude")
+#else:
+#    print("bro then why r u at a pizza shop")
+
+#truth_or_false=input("type something: ")
+#if (truth_or_false):
+#    print("It's a truthy!")
+#else:
+#    print("It's a falsy!")
+
+
+
+
+# Battle checker ~ !
+
+# Asks for level
+level = float(input("What is your level: "))
+print("")
+
+#Asks for weapon
+has_gear = input("Do you have a weapon (Y or N): ")
+print("")
+if has_gear=="Y":
+    has_gear=True
+else:
+    has_gear=False
+
+# Asks for health
+health = float(input("What is your health: "))
+print("")
+
+# Asks for armor
+has_armor = input("Do you have armor (Y or N): ")
+print("")
+if has_armor=="Y":
+    has_armor=True
+else:
+    has_armor=False
+
+# Asks for magic ring
+magic_ring = input("Do you have the magic ring (Y or N): ")
+print("")
+if magic_ring=="Y":
+    magic_ring=True
+else:
+    magic_ring=False
+
+# Checks for magic ring
+if magic_ring:
+    print("The magic ring grants you access!")
+
+#Checks for everything else
+elif level >= 10:
+    if has_gear or has_armor:
+        if health >= 50:
+            print("You are ready for battle!")
+        else:
+            print("Heal up before the fight!")
+    else:
+        print("You need a weapon to fight!")
+else:
+    print("Level up before entering this area!")        
+print("")
+print("")
+print("")
+print("")
+
+
+
+
+
+
+
+
+#for loops!
+
+for num in range(1, 6):
+    print(f"The current number is {num}")
+print("")
+
+for str in range(1, 7):
+    print(str)
+print("")
+
+for i in range(5):
+    print(i)
+print("")
+
+for i in range(2, 7):
+    print(i)
+print("")
+
+for i in range(10, 0, -2):
+    print(i)
+print("")
+
+for i in range(5, 0, -1):
+    print(i)
+print("")
+
+print("")
+print("")
+print("")
+print("")
+
+
+# While loops!
+
+count = 10
+while count > 0:
+    print(count)
+    count -=1
+print("Rocket blasting off!")
+
+x = 1
+while x < 10:
+    x*=2
+    print(x)
+
+# Making floors!
+for floor in range(3):
+    print("Starting Floor", floor + 1)
+    for block in range(4):
+        print("Placing block", block + 1)
+
+
+# More for loops
+for row in range(3):
+    for col in range(4):
+        print("*", end=" ")
+    print()  #New line after each row
+
+for row in range(1,5):
+    for col in range(1, row + 1):
+        print(col, end=" ")
+    print() 

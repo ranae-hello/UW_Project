@@ -1,0 +1,44 @@
+# Function practice!!
+
+
+# Definiton (defining the function.)
+# For this one, you say that say_hello(name) = print(f"Hello {name}!") (THEY ARE THE SAME)
+def say_hello(name):
+    print(f"Hello, {name}!")
+
+# Using the function (This one is a print statement, it won't always be!)
+#say_hello(name) will now print print(f"Hello {name}!"), so now just define (name)!
+say_hello("Emma")
+say_hello("Liam")
+say_hello("Sophia")
+
+print("")
+print("")
+
+# Defining the function
+def introduce(first_name, last_name, age):
+
+    # How to use the function
+    print("Let's meet our student!")
+    print(first_name, "is", age, "years old.")
+
+    # Seperation! seperates the words
+    print(first_name, last_name, sep="-")
+    print(first_name, "is", age, "years old.", sep="")
+
+    # End is kinda the same, but different
+    print("Name:", first_name, end=" ")
+    print(last_name)
+    print(first_name * 2, last_name * 3)
+    print("*" * 20)
+
+# Actually using the code -_-
+introduce("Amelia", "Smith", 13)
+
+print("")
+print("")
+
+def multiply(a=0, b=5):
+    return a * b
+
+multiply(3)
