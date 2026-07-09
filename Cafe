@@ -1,0 +1,46 @@
+# MENU LIST
+menu = {
+   "Croissant": 3.50,
+   "Latte": 5.00,
+   "Black coffee": 3.00,
+   "Espresso": 3.00,
+   "Muffins": 3.50,
+   "Avocado toast": 8.50,
+   "Matcha": 5.50,
+   "Cappuccino": 5.00,
+}
+
+# ADDING ITEMS
+def add():
+    food = input("ADD ITEM: ")
+    while True:
+        try:
+            food_pos = float(input("PRICE: "))
+            break
+        except ValueError as error:
+            print("Invalid. Please try again")
+    menu[food] = food_pos
+
+# DELETING ITEMS
+def remove():
+    remove = input("REMOVE FOOD: ")
+    del menu[remove]
+
+# DISPLAYING ITEMS
+def display():
+    display = input("What would you like to display: ")
+    print(f"{display} : {menu[display]}")
+
+# DAILY SPECIAL
+def specials(day):
+    print("Todays daily special:")
+    if day == 1:
+        print("Cake pop : $2.50")
+    elif day == 2:
+        print("Iced tea : $4.00")
+    elif day == 3:
+        print("Lemonade : $4.00")
+    elif day == 4:
+        print("Lemon iced toast : $7.50")
+    else:
+        print("Hot chocolate : $4.50")
