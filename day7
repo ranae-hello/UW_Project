@@ -1,0 +1,38 @@
+# Importing libraries (mostly turtle)
+import random
+import turtle
+
+# Creating the screen
+screen = turtle.Screen()
+screen.title("turtle screen!!")
+
+# Creating the turtle
+t=turtle.Turtle()
+t.speed(100)
+t.color("blue")
+t.shape("turtle")
+
+# Moving the turtle!
+
+t.forward(100)
+t.left(90)
+t.forward(100)
+t.pencolor("red")
+t.left(90)
+t.forward(100)
+t.left(90)
+t.forward(100)
+
+t.circle(100)
+
+# Draw a 180-degree arch with a radius of 100 pixels
+t.circle(100, extent=180)
+
+turtle.goto(200, 100)
+turtle.goto(-100, -100)
+turtle.goto(0, 0)
+
+print(turtle.xcor())
+print(turtle.ycor())
+# Keep the window open
+screen.mainloop()

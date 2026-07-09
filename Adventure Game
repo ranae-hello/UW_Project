@@ -1,0 +1,189 @@
+
+# Beginning variables
+healing_pots = 3
+player_name = ""
+inventory = ["sword", "shield", "map"]
+health = 100
+level = 1
+living = True
+
+# Dictionaries
+player_stats = {"Name" : player_name,
+                "Health" : health,
+                "Level" : level}
+map = {"Unkown Beginnings" : "Area 0"}
+
+# Functions
+def ending_stats():
+ print("YOUR JOURNEY: " + str(map))
+ print("")
+ print("PLAYER STATS: " + str(player_stats))
+ input("PRESS ENTER TO END: ")
+
+
+# Beginning variables
+healing_pots = 3
+
+# Start screen
+print("--- BLOSSOM MYSTERIES ---")
+input("PRESS ENTER TO START: ")
+print("")
+
+# Exposition
+
+while living:
+    print("You wake up in an unfamiliar place. You have a few items on you but that's about it.")
+    print("(As you get up, a random girl approaches you.)")
+    player_name = input("???: Hello traveller! I saw you knocked out so I brang you with me! Anyways, what's your name? ")
+    print("\"" + player_name + ".\" You mumble. You look around to find beautiful cherry blossoms surrounding you.")
+    print("???: Oh! well hi " + player_name + "! Welcome to The Cherry Kingdom! My name is Cassi.")
+    print("Cassi: Oh also, I found this on the ground next to you. Is it yours?")
+    print("+BACKPACK")
+    print("")
+
+    # INVENTORY (List)
+
+    print("---INVENTORY---")
+    print(inventory)
+    input("PRESS ENTER TO CONTINUE: ")
+
+    # Choice 1 : Town or Explore
+    choice1 = input("Cassi: Do you want to come with me to go to town? (Y or N) ")
+    choice1 = choice1.upper()
+
+    if choice1 == "Y" or choice1 == "YES":
+        print("Cassi: Yay let's go!")
+        print("")
+        print("---THE TOWN---")
+        map["THE TOWN"] = "Area 1"
+        input("PRESS ENTER TO CONTINUE: ")
+        print("Cassi: Welcome to Spring Hollow, my hometown! Let's go meet some people!")
+        print("She drags you forward as you scout the area.")
+        print("???: Hey Cassi! Who is that?")
+        print("Cassi: Hey Farmer Saparata!! This is " + player_name + "! They're helping us solve the mystery!!")
+        print("\"I never said that! What mystery??\" you say, looking confused.")
+        print("Cassi: Oh yea I forgot about that! Basically a lot of people are going missing and we can't find them!!!")
+        print("Saparata: Can you help us traveller?")
+        print("\"Sure I guess?\" you blurt out. It might help you figure out how you got here.")
+        print("Saparata: Oh thank you so much!! Here, take some bread to help you in this adventure.")
+        print("+BREAD")
+        inventory.append("bread")
+        print("Cassi: Alright, I can't join you because I'm a little bit of a scaredy cat, but I hope you have an amazing journey!!!")
+        input("PRESS ENTER TO CONTINUE: ")
+    else:
+        print("\"Um... no, no thanks. I think um I think I'm fine.\" you say. Part of you feels bad for declining her offer, but she's still a stranger afterall.")
+        print("Cassi: Awwww okay... I guess I'll see you-")
+        print("You walk away before she finishes talking.")
+        print("---THE CHERRY GROVE---")
+        map["THE CHERRY GROVE"] = "Area 2"
+        print("While walking through the cherry trees, you see a sign and decide to read it.")
+        print("")
+        print("---ATTENTION EVERYONE!---")
+        print("MANY PEOPLE FROM OUR TOWN HAS GONE MISSING, PLEASE STAY CAUTIOUS AND NEVER GO OUT ALONE.")
+        print("\"Huh. That's interesting.\" you say to yourself. This might help you find out how you got here.")
+        choice1_mini = input("Investigate further? (Y or N) ") 
+        choice1_mini = choice1_mini.upper()
+        if choice1_mini == "Y" or choice1_mini == "YES":
+            print("You decide to keep heading forward. Hoping to investigate this issue further.")
+        else:
+            print("You decide that it's nothing to worry about and you decide to just find a way out of here.")
+            print("")
+            print("---A FEW DAYS LATER---")
+            print("After a few days, you finally reach the end of the forest, stepping into the grass plains.")
+            print("There, you build a small house and live a small, comfortable life. However, the thought of the adventure you could've had fills your thoughts.")
+            print("")
+            print("---ENDING 1 : THE UNCOMPLETED GOALS---")
+            print(ending_stats())
+            break
+    print("")
+    print("---THE MYSTERY FORREST---")
+    map["MYSTERY FORREST"] = "Area 3"
+    print("")
+    print("You come across an unfamiliar forrest. The trees are spruce and it's very foggy.")
+    choice2 = input("As you wander around, you find a big cave. Do you go inside? (Y or N) ")
+    choice2 = choice2.upper()
+    if choice2 == "Y" or choice2 == "YES":
+        print("You find a huge spider!")
+        choice2_mini_2 = input("Do you fight it? (Y or N) ")
+        choice2_mini_2 = choice2_mini_2.upper()
+        if choice2_mini_2 == "Y" or choice2_mini_2 == "YES":
+            print("You attack the spider!")
+            print("It attacks back!")
+            print("You attack it again!")
+            print("It slowly backs up!")
+            print("You pull out your sword and slay the spider!")
+            print("+1 LEVEL")
+            input("PRESS ENTER TO CONTINUE: ")
+            level += 1
+        else:
+            print("You decide to sneak past it.")
+
+
+    else:
+        print("You decide to skip the cave and keep going.")
+        
+    print("")
+    print("---THE STRANGE HOUSE---")
+    map["STANGE HOUSE"] = "Area 4"
+    print("While looking through the forest, you find a strange house!")
+    choice3 = input("Investigate? (Y or N) ")
+    choice3 = choice3.upper()
+    if choice3 == "Y" or choice3 == "YES":
+        print("When you go inside, you find a piece of paper. You decide to read it.")
+        print("(To those who find this, I am already gone. There is an evil witch turning all the people of Spring Hollow into spruce trees.)")
+        print("(Soon enough, every single cherry tree in the forrest will be turned to spruce, made with the bodies of those who onced loved cherry trees.)")
+        print("(There was once a traveller, came from far away, that tried to slay the evil witch but failed.)")
+        print("\"That's interesting..\" you say to yourself, and you decide to keep reading.")
+        print("The traveller managed to flee with their life, but they were never seen again. Thought to be forever sleeping in the endless forrest.")
+        print("\"Is that... me.?\" you think to yourself. The description oddly matched where you woke up.")
+        input("PRESS ENTER TO CONTINUE: ")
+        print("Just as you were about to leave, the evil witch sprang up behind you!")
+        print("???: Hahahaha! I am Flux, the evil witch of this land! Just where do you think you're going?")
+        print("You quickly pull out your sword to fight her.")
+        print("Flux: I'm sorry but your little sword can't beat me!")
+        print("You fight her anyway.")
+        print("")
+        input("PRESS ENTER TO CONTINUE: ")
+        print("")
+        if "bread" in inventory and level == 2:
+            print("You eat your bread!")
+            print("+1 LEVEL")
+            level += 1
+            print("Flux: Oh, you think that small piece of bread is gonna save you? Hahahaha!")
+            print("You swing your sword")
+            print("She dodges!")
+            print("She casts a spell!")
+            print("You block it with your shield!")
+            print("Finally, you swing your sword, hitting her right in the chest!")
+            print("The witch died!")
+            print("")
+            input("PRESS ENTER TO CONTINUE: ")
+            print("")
+            print("---A FEW DAYS LATER---")
+            print("After a few days, you returned to the town. With the witch dead, everyone turned back into a human.")
+            print("They hosted a parade to honor you, and though you never got to find where your home truly was, you feel just a home in Spring Hollow.")
+            print("---ENDING 2 : THE HERO")
+            player_stats["Level"] = 3
+            print(ending_stats())
+            break
+        else:
+            print("You try to attack, but you are too weak!")
+            print("The witch easily dodges your attacks!")
+            print("Flux: Hahahaha! Goodbye forever!!!")
+            print("YOU DIED!")
+            player_stats["Health"] = 0
+            health = 0
+            print("---ENDING 3 : UNPREPARED MESS---")
+            print(ending_stats())
+            break
+    else:
+        print("You decide to keep going forward.")
+        print("---A FEW DAYS LATER---")
+        print("It's been a few days and you've found nothing else.")
+        print("Your health became low from all the random monster attacks, so you decide to just sit at a campfire and wait for your death.")
+        print("")
+        print("---ENDING 4 : THE INDECISIVE TRAVELLER---")
+        print(ending_stats())
+        break
+
+

@@ -1,0 +1,100 @@
+# Importing statistics! (used once)
+import statistics as sts
+
+# Lists - use BRACKETS and all types can be stored in the same list (booleans, strings, integers, floats)
+animals = ["turtles", "orcas", "bunnies", "10"]
+print(animals)
+
+# Append to insert at the end, insert to insert in the middle
+animals.append("rabbit")
+animals.insert(1, "kitty")
+print(animals)
+
+# Remove to remove and pop to remove and put in a different variable
+animals.remove("rabbit")
+print(animals)
+forgotten_animal = animals.pop(2)
+print(forgotten_animal)
+print("")
+
+# Using variables for lists
+food1 = input("Whats ur fav food: ")
+food2 = input("Whats ur sec fav food: ")
+food3 = input("Whats ur third fav food: ")
+foods = [food1, food2, food3]
+print("")
+
+# Accessing specific elements in a list
+colors = ["red", "blue", "green", "yellow", "purple"]
+print(colors[0 : 3]) # Will go from red, blue, and green. (0-3)
+print(colors[:3]) # Will do all numbers under 3 (red, blue, green)
+print(colors[-1]) # Will print the last (purple)
+print("")
+
+# Sorting numbers
+numbers = [10, 2, 5, 29]
+numbers.sort()
+print(numbers)
+
+# Averaging them out (NEED A LIBRARY TO USE!)
+avg_num = sts.mean(numbers)
+print(avg_num)
+print("")
+
+# TUPLES!!!
+subject_tuple = ("math", "science", "english", "history")
+print(subject_tuple)
+print("")
+
+# Accessing tuples
+animals_tuple = ("cat", "dog", "rabbit", "hamster")
+print(animals_tuple[1]) # Does the same thing list does but with a tuple
+
+# Tuple conversion to list
+animals_list2 = list(animals_tuple)
+print(animals_list2)
+animals_list2.insert(2, "orca")
+animals_tuple2 = tuple(animals_list2)
+print(animals_tuple2)
+print("")
+
+# Printing min and max (first and last)
+print(min(animals_tuple2))
+print(max(animals_tuple2))
+print("")
+
+# DICTIONARIES !!
+student = {"name": "Jordan", "age": 13, "grade": 7, "skills": ["Eating", "Cooking"]}
+print(student)
+
+# Accessing values
+print(student["name"])
+print(student["grade"])
+print("")
+
+# Practicing dictionaries
+student2 = {"name": "Alex", "grade": 8, "school": "Sunrise Middle"}
+print(student2)
+print(student2["name"])
+print("")
+
+# Changing values in the dictionary
+student2["grade"] = 9
+print(student2)
+student2["GPA"] = 3.8
+print(student2)
+GPA = student2.pop("GPA")
+print(student2)
+print("")
+
+# Putting dictionaries in actual sentences
+print(student2["name"],"is in grade",student2["grade"],"and goes to",student2["school"],"school.")
+print("")
+
+# String methods
+name = "hello WORLD"
+print(name.upper()) # ALL UPPERCASE
+print(name.lower()) # all lowercase
+print(name.title()) # Every First Letter Is Capitalized
+print(name.capitalize()) # First letter is capitalized
+print(name.swapcase()) # SWAPS lower AND uppercase

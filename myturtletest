@@ -1,0 +1,109 @@
+import turtle
+
+
+
+# Creating the turtle
+t=turtle.Turtle()
+t.speed(100)
+t.color("blue")
+t.shape("turtle")
+t.speed(2)
+
+# Creating the screen
+S = turtle.Screen()
+t.screen.title("turtle screen!!")
+
+S.bgcolor("black")
+
+t.fillcolor("blue")
+
+# Draw
+
+# Eye 1
+t.left(90)
+t.circle(100, extent=180)
+t.left(90)
+t.forward(200)
+t.back(80)
+t.left(90)
+
+# Filled in
+t.begin_fill()
+t.forward(95)
+t.back(95)
+t.right(90)
+
+t.forward(80)
+t.left(90)
+
+t.circle(100, extent=80)
+t.end_fill()
+t.left(101)
+t.forward(100)
+t.left(90)
+
+t.penup()
+t.forward(300)
+
+t.pendown()
+
+# Eye 2
+t.left(90)
+t.circle(100, extent=180)
+t.left(90)
+t.forward(200)
+t.back(80)
+t.left(90)
+t.begin_fill()
+t.forward(95)
+t.back(95)
+t.right(90)
+
+t.forward(80)
+t.left(90)
+
+t.circle(100, extent=80)
+t.end_fill()
+t.left(101)
+t.forward(100)
+t.left(90)
+t.forward(80)
+
+# Body
+t.penup()
+t.back(225)
+t.right(90)
+t.forward(200)
+t.pendown()
+t.left(90)
+
+t.circle(250)
+
+t.penup()
+
+# Mouth
+t.left(90)
+t.forward(150)
+t.left(90)
+t.forward(120)
+t.left(90)
+t.pendown()
+t.begin_fill()
+t.circle(120, extent=180)
+t.left(90)
+t.forward(240)
+t.end_fill()  
+t.penup()
+
+# Eyebrow
+t.right(90)
+t.forward(160)
+t.right(90)
+t.forward(80)
+t.left(120)
+t.pendown()
+t.circle(100, extent = 120)
+
+
+# Keep the window open
+S.mainloop()
