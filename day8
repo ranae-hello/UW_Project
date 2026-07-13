@@ -1,0 +1,118 @@
+# Warmup
+name = "hiiii"
+sentence = "thou is a sentence"
+
+print(name.upper())
+print(name.lower())
+
+sentence_but_better = sentence.replace("is", "is NOT")
+print(sentence_but_better.title())
+
+
+word = "Turtle"
+
+print(word[::-1])
+
+# Files
+
+# Opens file
+file = open("data.txt", "w")
+file.write("Hello world!\n")
+
+# Appends (adds) something on a file
+file = open("data.txt", "a")
+file.write("this should append, not delete\n")
+file.close() 
+
+file = open("data.txt", "r")
+
+
+
+# Reads file (readlines turns it into a list)
+content = file.readlines()
+print(content)
+
+
+
+# Closes file
+file.close()
+
+# Using with closes the file for you
+with open("data.txt", "r") as file:
+    print(file.read())
+
+# If you open a file to write, you have to close it before you can read!
+with open("my_info.txt", "w") as file:
+    file.write("test test pls work \n")
+
+with open("my_info.txt", "a")  as file:
+    file.write("we wa we wa")
+
+# This closes the file and re-opens it to read! 
+file = open("my_info.txt", "r")
+me_lines = file.readlines()
+print(me_lines)
+print("Number of lines: ", len(me_lines))
+file.close()
+
+# OBJECT ORIENTED PROGRAMMING (OOP)
+
+# Classes (basically a blueprint)
+class Car:
+
+    # Attributes (data stored in an object)
+    # __ means you can't change it
+    __wheels = 4
+
+class Car:
+
+    # Functions can change the speed!
+    def __innit__(self):
+        self.__speed = 0
+
+    # This can change the speed
+    def drive(self, amount):
+        self.__speed += amount
+    
+    # So can this
+    def stop(self):
+        self.__speed = 0
+print(Car)
+
+# Encapsulation - only allowing safe, controlled access. (Stops cyber hacking)
+
+class Car:
+    def __innit__(self, brand):
+        self.brand = brand
+        self.__speed = 0 # Private attribute
+
+    def drive(self, amount):
+        self.__speed += amount
+    
+    def stop(self):
+        self.__speed = 0
+
+# Inheritance (Giving a class to another)
+
+# First class
+class Car:
+    def __innit__(self, brand, color):
+        self.brand = brand
+        self.color = color
+        self.__speed = 0
+    def drive(self, amount):
+        self.__speed += amount
+
+# Inherting Car and adding more.
+class SportsCar(Car):
+    def __innit__(self, brand, color, turbo):
+        super().__innit__(brand, color)
+
+        self.turbo = turbo
+    def drive_with_turbo(self):
+        self.__speed += self.turbo
+
+# Changing some things inside sports car
+my_sports_car = SportsCar("Ferrari", "Red", 50)
+my_sports_car.drive(20)
+my_sports_car.drive_with_turbo()

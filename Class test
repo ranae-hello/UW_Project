@@ -1,0 +1,74 @@
+# EXAMPLE
+
+# Defining the blueprint
+class Dog:
+    # Class attribute (shared by all dogs)
+    species = "Canine" 
+    
+    # The Constructor method to initialize each new object
+
+    # Innit means innitialize the first instances of the object, basically defining it
+    def __init__(self, name, breed):
+
+        # Self means to only update THE SPECIFIC object, not the whole class. It's not a variable, it needs to be defined in self, but you don't need to define it elsewhere.
+        self.name = name    # Instance attribute
+        self.breed = breed  # Instance attribute
+        
+    # Instance method (behavior)
+    def bark(self):
+        return f"{self.name} says Woof!"
+
+# Instantiating (creating) objects
+dog1 = Dog("Buddy", "Golden Retriever")
+dog2 = Dog("Rex", "German Shepherd")
+
+# Accessing data and behaviors
+print(dog1.bark())   # Output: Buddy says Woof!
+print(dog2.species)  # Output: Canine
+
+
+# INHERITING:
+# Parent class
+class Vehicle:
+    def start(self):
+        return "Engine started."
+
+# Child class inherits from Vehicle
+class Car(Vehicle):
+    def drive(self):
+        return "Car is moving."
+
+my_car = Car()
+print(my_car.start())  # Inherited: "Engine started."
+
+
+# ENCAPSULATION
+# It's just a security measure. __ (double underscore) makes a thing harder (not impossible!) to change.
+class Car:
+    def __innit__(self, brand):
+        self.brand = brand
+        self.__speed = 0 # Private attribute
+
+    def drive(self, amount):
+        self.__speed += amount
+    
+    def stop(self):
+        self.__speed = 0
+
+
+
+# MY TEST (Digital pet)
+class Pet:
+    def __init__(self, species, name, health, food):
+
+        self.name = name
+        self.species = species
+        self.health = health
+        self.food = food
+
+    # Turns the object into an actual readable string that can be computed with a print statement
+    def __str__(self):
+        return f"Name: {self.name} | Species: {self.species} | Health: {self.health} | Food: {self.food}"
+
+print(Pet("hi","test", 100, 100))
+
