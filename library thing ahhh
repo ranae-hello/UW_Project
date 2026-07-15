@@ -1,0 +1,276 @@
+import random
+
+
+class Book:
+   def __init__ (self, book_id, book_name):
+       self.book_id = book_id
+       self.book_name = book_name
+
+
+# Everything about the user
+class User:
+   def __init__ (self, id, name):
+       self.id = id
+       self.name = name
+       self.borrowed = []
+   def __str__(self):
+        return f"User ID: {self.id} | Name: {self.name}"
+
+
+  
+   # def borrowed_books (self, borrow_book):
+   #     self.borrowed.append(borrow_book)
+
+
+# EVERYTHING
+class Admin:
+   def add_book(self, book_id, book_name):
+       new_book = Book(book_id, book_name)
+       return new_book
+  
+   def add_user(self, id, name):
+       new_user = User(id, name)
+       return new_user
+
+
+# Starting variables
+playing = True
+book_to_find = ""
+user1 = ""
+library_inventory = {}
+admin = Admin()
+
+
+
+book1 = admin.add_book(1936482749, "The Hunger Game")
+library_inventory[book1.book_name] = 2
+
+
+book2 = admin.add_book(3456456576, "The Starvation Games")
+library_inventory[book2.book_name] = 2
+
+book3 = admin.add_book(1293874659, "The Object Games")
+library_inventory[book3.book_name] = 2
+
+
+book4 = admin.add_book(2304871348, "The Blue Games")
+library_inventory[book4.book_name] = 2
+
+book5 = admin.add_book(2734813874, "How To Kill A Bird")
+library_inventory[book5.book_name] = 2
+
+
+
+
+
+
+
+
+
+
+# Input
+
+print("Welcome to the Cuzanne Sollins Library!")
+name = input("Please enter your name: ")
+print("")
+
+# User id
+for i in range(10):
+    id = random.randint(1000000000,9999999999)
+
+user1 = admin.add_user(id, name)
+
+print(user1)
+
+# Starting the loop
+while playing:
+    print(library_inventory)
+
+    # Looking for the right book
+    book_to_find = input("What book are you looking for: ")
+    print("")
+
+    # Make the book a title
+    book_to_find = book_to_find.title()
+
+    # Checking if the book is in system
+    if book_to_find in library_inventory:
+
+    # User already has it
+        if book_to_find in user1.borrowed:
+            print("Sorry, you borrow two of the same book.")
+
+    # If it is in system
+        elif library_inventory[book_to_find] >= 1:
+            library_inventory[book_to_find] -= 1
+            user1.borrowed.append(book_to_find)
+            print("Book found. You have now borrowed:",book_to_find)
+
+   # It is not in system
+        else:
+            print("Sorry, this book isn't available.")
+
+    # If it is random
+    else:
+        print("Book was not found.")
+    
+    # Ask the user to quit
+    quit = input("Quit? (Q): ")
+    quit = quit.upper()
+
+    if quit == "Q" or quit =="QUIT" or quit == "YES" or quit == "Y":
+        print("Thank you for visitng the Cuzanne Sollins Library!")
+        print("")
+        print("BORROWED BOOKS:", user1.borrowed)
+        break
+
+
+
+
+
+
+# id is unique num for book
+# name is title of book
+# quantity is how many copies available
+# methods: borrow, return books
+# check quantity
+# add book (check id)
+
+
+# Import libraries
+#import random
+
+
+# Book (everything abt the book and print)
+#class Book:
+#   def __init__ (self, book_id, book_name, quantity):
+#       self.book_id = book_id
+#       self.book_name = book_name
+#       self.quantity = quantity
+
+
+
+
+#   def __str__ (self):
+#       return f"Book name: {self.book_name} | Book ID: {self.book_id} | Copies available: {self.quantity}"
+
+
+# Everything about the user
+#class User:
+#   def __init__ (self, id, name, borrowed):
+#       self.id = id
+#       for i in range(10):
+#           self.id = random.randint(1000000000,9999999999)
+#       self.name = name
+#       self.borrowed = []
+
+
+#   def has_borrowed(self, book_id):
+#       return book_id in self.borrowed
+  
+#   def add_borrowed(self, book_id):
+#       if self.has_borrowed(book_id):
+#           return False
+#       self.borrowed.append(book_id)
+#       return True
+
+
+#   def __str__(self):
+#       return f"User ID: {self.id} | Username: {self.name} | Total books borrowed: {self.borrowed}"
+
+
+# EVERYTHING
+#class Admin:
+#   def __init__ (self, users, books):
+#       self.users = users
+#       self.books = books
+
+
+   # Check to see if user already has book
+#   def add_borrowed(self, new_book):
+#       self.borrowed.append(new_book)
+
+
+
+
+#   def borrow_copy(self):
+#       if self.quantity <= 0:
+#           print("Book is UNAVAILABLE.")
+#       self.quantity -= 1
+#       return True
+
+
+
+
+#   def return_copy(self):
+#       self.quantity += 1
+
+
+
+
+# Menu of suzanne collin ripoffs (yummy!)
+#menu = {
+#   "The Hunger Game" : 1936482749,
+#   "The Starvation Games" : 3456456576,
+#   "The Object Games" : 1293874659,
+#   "The Blue Games" : 2304871348,
+#   "How To Kill A Bird" : 2734813874
+#}
+
+
+#quantity = {
+#   "The Hunger Game": 2,
+#   "The Starvation Games": 2,
+#   "The Object Games": 2,
+#   "The Blue Games": 2,
+#   "How To Kill A Bird": 2
+#   }
+
+
+
+
+# chosen book = inputs "the blue games"
+# chosen book = chosen book.title()
+# print(Book(chosen book))
+
+
+#playing = True
+
+
+#print("Welcome to the Cuzanne Sollins Library!")
+#name = input("Please enter your name: ")
+#print("")
+#print(User(1,name,0))
+
+
+#while playing:
+#   print("This is our selection.")
+#   print("")
+#   print(menu)
+#   print("")
+#   book = input("Which book would you like (q to quit): ")
+#   book = book.title()
+#   if book in menu:
+#       print(f"New book checked out: {book}")
+
+
+#   elif book == "q" or book == "Q":
+#       print("Thank you for visiting the Cuzanne Sollins Library!")
+#       break
+
+
+#   elif book not in menu:
+#       while book not in menu:
+#           print("Book was not found, please try again.\n")
+#           book = input("Which book would you like: ")
+#           book = book.title()
+
+
+  
+#   print("Here is the book:")
+#   stuff = menu[book]
+
+#   print(Book(stuff, book, 2))
+   
+
+
