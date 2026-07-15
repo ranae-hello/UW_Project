@@ -87,4 +87,5 @@ while playing:
     if quit == "Y" or quit == "YES":
         break
 
+
     day += 1

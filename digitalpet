@@ -2,8 +2,6 @@
 # Importing Libraries
 import random
 
-
-
 # Function for how HORRIBLE a user is at petkeeping!
 def horrible():
       print("""HORRIBLE >:(
@@ -321,6 +319,7 @@ while alive:
          cleanliness = 0
     if health < 0:
          health = 0
+
 
 
 

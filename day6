@@ -10,6 +10,7 @@ animals.append("rabbit")
 animals.insert(1, "kitty")
 print(animals)
 
+
 # Remove to remove and pop to remove and put in a different variable
 animals.remove("rabbit")
 print(animals)

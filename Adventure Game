@@ -13,6 +13,7 @@ player_stats = {"Name" : player_name,
                 "Level" : level}
 map = {"Unkown Beginnings" : "Area 0"}
 
+
 # Functions
 def ending_stats():
  print("YOUR JOURNEY: " + str(map))

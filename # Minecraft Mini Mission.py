@@ -89,3 +89,4 @@ def night_patrol(time, energy):
 energy=int(input("What's your energy level: "))
 time=1
 night_patrol(time, energy)
+
