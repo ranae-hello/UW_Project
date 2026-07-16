@@ -1,0 +1,31 @@
+import matplotlib.pyplot as plt
+import statistics
+
+rain = [4.05, 3.30, 6.43, 2.34, 1.57, 1.58]
+months = ["January", "February", "March", "April", "May", "June"]
+
+plt.plot(months, rain, color="skyblue", linestyle="-", marker="o", linewidth=2)
+# Add labels and a title
+plt.title("Rain in Washington State")
+plt.xlabel("Month")
+plt.ylabel("Perticipation level (Inches)")
+
+print("I chose a line graph because I'm tracking numbers over a period of time")
+
+
+print("1. Except for March, the percipitation level went down each month.")
+print("2. The value that appeared the most often was 1.57 / 1.58.")
+print("3. The graph helps answer my research question as it shows the perticipation level each month as a visual. \n")
+
+mean = print("The mean is:",statistics.mean(rain))
+print("It tells us the average amount of rain that fell over the 6 month period.")
+
+
+
+
+plt.show()
+print("""SOURCE : NOAA - National Centers for Environmental Information
+Climate at a Glance Statewide Rankings
+      https://www.ncei.noaa.gov/access/monitoring/climate-at-a-glance/statewide/rankings/45/pcp/202601 
+
+""")

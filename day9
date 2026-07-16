@@ -1,34 +1,20 @@
 import pygame
-import sys
-
 pygame.init()
 
-# Set window size
-screen_width = 640
-screen_height = 480
+screen = pygame.display.set_mode((400,400))
+# Fill the screen with red
+screen.fill((255, 0, 0))
+pygame.display.update()
+pygame.time.wait(1000)
 
-running = True
-# Create display window
-screen = pygame.display.set_mode((screen_width, screen_height))
-clock = pygame.time.Clock()
+# Fill the screen with green
+screen.fill((0, 255, 0))
+pygame.display.update()
+pygame.time.wait(1000)
 
+# Fill the screen with blue
+screen.fill((0, 0, 255))
+pygame.display.update()
+pygame.time.wait(1000)
 
-
-pygame.display.set_caption("My First Pygame Window")
-# 4. The Infinite Game Loop
-while running:
-    # Look at all user/system interactions
-    for event in pygame.event.get():
-        # If the user clicks the window's "X" button
-        if event.type == pygame.QUIT:
-            running = False
-
-    # Fill screen background (optional color)
-    screen.fill((255, 255, 255))
-    pygame.draw.circle(screen, (0,0,255), (320, 240), 50)
-    # Update the visual display window
-    pygame.display.flip()
-
-# 5. Clean exit cleanup 
 pygame.quit()
-sys.exit()

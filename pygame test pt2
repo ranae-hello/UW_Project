@@ -1,0 +1,39 @@
+import pygame
+
+pygame.init()
+screen = pygame.display.set_mode((800, 600))
+move = 150
+direction = 1 
+speed = 2
+bounce = 250
+acceleration = 0.1 # How much faster it gets every frame
+
+clock = pygame.time.Clock()
+while True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+
+    move += speed * direction
+    bounce += speed * direction
+
+    # Reverse direction when it hits the boundaries
+
+    if move >= 300:
+        direction = -1  # Start moving up
+    elif move <= 150:
+        direction = 1  # Start moving down
+    
+
+
+    screen.fill((255,255,255))
+
+    pygame.draw.ellipse(screen, (230,234,214), (200, move, bounce, 300))
+    move += 1
+    bounce += 1
+    
+    pygame.time.wait(5)
+
+                
+
+    pygame.display.flip()

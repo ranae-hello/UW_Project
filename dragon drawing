@@ -1,0 +1,66 @@
+import pygame
+import sys
+pygame.init()
+
+screen_width = 640
+screen_height = 480
+speed = 5
+x = 220
+y = 150
+big = 1
+clock = pygame.time.Clock()
+screen = pygame.display.set_mode((800, 600))
+
+while True:
+
+    # Make sure pygame doesn't crash
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        keys = pygame.key.get_pressed()
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+         y -= speed
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+         x -= speed
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+         y += speed
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+         x += speed
+            
+
+    if x < 0:
+         x = 0
+    if x > 800:
+         x = 800
+    if y < 150:
+         y = 150
+    if y > 600:
+         y = 600
+    screen.fill((10,20,150))
+
+    pygame.draw.line(screen, (0,0,0), (780,10), (700,70), 10)
+    pygame.draw.line(screen, (0,0,0), (800,15), (720,80), 10)
+    pygame.draw.line(screen, (0,0,0), (820,20), (740,90), 10)
+    pygame.draw.circle(screen, (84, 51, 27), (700,100), 30 + big)
+
+    if big > 500:
+         print("ded \n")
+         break
+
+    pygame.draw.rect(screen, (0,50,0), (0, 300, 10000, 1000000))
+    pygame.draw.rect(screen, (0,100,0), (x - 70, y, 50, 200))
+    pygame.draw.rect(screen, (0,100,0), (x - 180, y, 80, 45))
+    pygame.draw.rect(screen, (0,100,0), (x, y, 50, 100))
+    pygame.draw.rect(screen, (0,100,0), (x + 70, y, 50, 200))
+    pygame.draw.rect(screen, (0,100,0), (x + 140, y - 3, 50, 80))
+    pygame.draw.rect(screen, (0,100,0), (x + 210, y - 70, 100, 80))
+    pygame.draw.rect(screen, (0,100,0), (x + 210, y - 50, 170, 80))
+    pygame.draw.rect(screen, (0,0,0), (x + 220, y - 60, 20, 20))
+    pygame.draw.rect(screen, (0,0,0), (x + 280, y - 60, 20, 20))
+    
+    big += 1
+    
+
+
+    pygame.display.flip()
+    clock.tick(60)

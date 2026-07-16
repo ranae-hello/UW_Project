@@ -1,0 +1,126 @@
+LESSON: 3.6 - Time
+EXERCISE: Code Your Own
+
+TITLE: LetsKillTheFish!
+DESCRIPTION: A murder game where you have to click on fish
+to kill them and win!
+"""
+
+# Import and set up libraries
+import tsk
+import random
+import pygame
+pygame.init()
+
+# Set up window
+window = pygame.display.set_mode([500,500])
+window.fill((26, 201, 201))
+
+# Introduce game
+print("WELCOME TO LETSKILLTHEFISH©!")
+print("-------------------------------------------------------")
+print("CLICK ON FISH TO KILL THEM AND TO WIN!")
+print("-------------------------------------------------------")
+print("BONUS! KILL ALL THE FISH BEFORE THE BUBBLE DISAPPEARS!")
+print("-------------------------------------------------------")
+print()
+
+# User inputs
+name = input("Name: ")
+fish = int(input("How many fishes do you want at a time (1-10): "))
+
+# Prevent too many fish because Tashi already tried that
+while fish < 1 or fish > 10:
+    print("TOO MANY FISHES >:(")
+    fish = int(input("How many fishes do you want? (1-10): "))
+
+# Start message!
+print()
+print("LET'S START " + name + "!")
+print()
+
+# Set up variables
+score = 0
+c = pygame.time.Clock()
+time = 0
+fish_list = []
+color_list = []
+current = 0
+caught = 0
+bub_offset = 500
+bubble_start_pos = random.randint(0,500)
+
+# While loop for drawing fish
+while current < fish:
+       
+        # Failed colors :(
+        #fish_color_r = random.randint(0, 255)
+        #fish_color_g = random.randint(0, 255)
+        #fish_color_b = random.randint(0, 255)
+       
+        center_x = random.randint(80, 460)
+        center_y = random.randint(80, 460)
+        width = random.randint(20, 80)
+        height = random.randint(20, 40)
+       
+        rect = pygame.Rect(center_x, center_y, width, height)
+       
+        pygame.draw.ellipse(window, (252, 186, 3), rect)
+        fish_list.append(rect)
+       
+        current += 1
+
+# Main loop
+running = True
+
+while running:
+   
+    # Calculate how much time it takes to kill fish
+    time += c.get_time()
+   
+    # Animate bubble
+    bub_offset -= 3
+    window.fill((26, 201, 201))
+    pygame.draw.circle(window, (167, 255, 251), (bubble_start_pos, bub_offset), 15)
+   
+    # Kill fish
+    for f in fish_list:  
+            pygame.draw.ellipse(window, (252, 186, 3), f)
+           
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+       
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            x, y = pygame.mouse.get_pos()
+            for f in fish_list:
+                catch_area_x = f.x - x
+                catch_area_y = f.y - y
+                   
+                if catch_area_x < 0 and catch_area_x > -80:
+                    if catch_area_y < 0 and catch_area_y > -40:
+                        caught += 1
+                        print("DIE!")
+                        fish_list.remove(f)                
+   
+    # Check if user kills all fish and reflection
+    if len(fish_list) == 0:
+        print()
+        print("YOU WIN!")
+        window.fill((26, 201, 201))
+        pygame.display.flip()
+        print("IT TOOK YOU " + str(time) + " MILLISECONDS TO KILL ALL THE FISH!")
+        print()
+        reflection = input("How do you feel? (happy/sad) ")
+        if reflection == "happy":
+            print("YAY " + name + ", KILL THOSE FISHIES!!!")
+        elif reflection =="sad":
+            print(name + ", it's so fun, of course you woudn't understand...")
+        else:
+            print("Excuse you " + name + ", do you think you are TOO GOOD for this? Answer correctly next time *disgust*")
+        running = False
+   
+    # Finish code
+    c.tick(30)
+    pygame.display.flip()
+    
