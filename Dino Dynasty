@@ -1,0 +1,498 @@
+# Importing libraries
+import pygame
+import sys
+pygame.init()
+
+# Starting variables
+screen_width = 640
+screen_height = 480
+speed = 5
+x = 220
+y = 150
+big = 1
+name = ""
+player_level = 0
+player_health = 100
+player_coins = 0
+color = 1
+size = 1
+meteor_lvl = 1
+taking_away_health = 0
+death = 0
+clock = pygame.time.Clock()
+
+# Screen for pygame
+screen = pygame.display.set_mode((800, 600))
+
+# Class for meteor
+class Meteor:
+    def drawing(color, size):
+         # Drawing the meteor!!
+        pygame.draw.line(screen, (0,0,0), (780,10), (700,70), 10)
+        pygame.draw.line(screen, (0,0,0), (800,15), (720,80), 10)
+        pygame.draw.line(screen, (0,0,0), (820,20), (740,90), 10)
+        pygame.draw.circle(screen, (color), (700,100), size + big)
+    # Some variables for the meteor (the health, name and level)
+    def __innit__(self, health, name, lvl):
+
+        self.name = name
+        self.lvl = lvl
+
+    # Turning it into a string
+    def __str__(self, health, name, lvl): 
+         return f"Meteor name : {self.name} | Meteor level : {self.lvl}"
+    
+# Dictionary for player stats
+player_stats = {"Name: " : name,
+                "Level: " : player_level,
+                "Health: " : player_health,
+                "Wealth: " : player_coins
+                }
+
+# List for the shop inventory
+shop = ["Shield", "Armor Helmet", "Armor Chestplate", "Armor Leggings", "Armor Boots", "Dinoprofen", "T-Rexanol"]
+
+# List for the player inventory
+inventory = []
+
+# Function for leg animation
+def legs():
+    screen.fill((10,20,150))
+
+    # Meteor drawing
+    pygame.draw.line(screen, (0,0,0), (780,10), (700,70), 10)
+    pygame.draw.line(screen, (0,0,0), (800,15), (720,80), 10)
+    pygame.draw.line(screen, (0,0,0), (820,20), (740,90), 10)
+    pygame.draw.circle(screen, (color), (700,100), size + big)
+
+    # Dino drawing
+    pygame.draw.rect(screen, (0,50,0), (0, 300, 10000, 1000000))
+    pygame.draw.rect(screen, (0,100,0), (x - 180, y, 80, 45))
+    pygame.draw.rect(screen, (0,100,0), (x, y, 50, 100))
+
+    # Legs
+    pygame.draw.rect(screen, (0,100,0), (x + 70, y, 50, 150))
+    pygame.draw.rect(screen, (0,100,0), (x - 70, y, 50, 200))
+
+    # Boots
+    if "Armor Boots" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x + 65, y + 100, 60, 50))
+        pygame.draw.rect(screen, (100,100,100), (x - 75, y + 150, 60, 50))
+
+# Second leg animation
+def legs2():
+    screen.fill((10,20,150))
+
+    # Meteor drawing
+    pygame.draw.line(screen, (0,0,0), (780,10), (700,70), 10)
+    pygame.draw.line(screen, (0,0,0), (800,15), (720,80), 10)
+    pygame.draw.line(screen, (0,0,0), (820,20), (740,90), 10)
+    pygame.draw.circle(screen, (color), (700,100), size + big)
+
+    # Dino drawing
+    pygame.draw.rect(screen, (0,50,0), (0, 300, 10000, 1000000))
+    pygame.draw.rect(screen, (0,100,0), (x - 180, y, 80, 45))
+    pygame.draw.rect(screen, (0,100,0), (x, y, 50, 100))
+
+    # Legs
+    pygame.draw.rect(screen, (0,100,0), (x + 70, y, 50, 200))
+    pygame.draw.rect(screen, (0,100,0), (x - 70, y, 50, 150))
+
+    # Boots
+    if "Armor Boots" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x + 65, y + 150, 60, 50))
+        pygame.draw.rect(screen, (100,100,100), (x - 75, y + 100, 60, 50))
+
+
+# User input
+print("Welcome to the Dino Dynasty!")
+name = input("PLEASE ENTER YOUR NAME: ")
+print(f"Hello {name}! You are in Laramidia 66 million years in the past!")
+print("You are trying to survive 4 meteors hitting Earth, each with it's respective difficulty.")
+print("Collect money from dying and use it to get more gear, allowing you to survive each meteor.")
+print("Get all levels and items ")
+print("Get all upgrades and reach level 5 to move on to the boss.")
+print("Goodluck! You'll need it :) \n")
+player_stats["Name: "] = name
+print(player_stats)
+input("PRESS ENTER TO CONTINUE: ")
+print("EASY : METEOR 1")
+# Starting game loop
+while True:
+
+    # Make sure pygame doesn't crash
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+        keys = pygame.key.get_pressed()
+
+    # Player movement
+    if keys[pygame.K_UP] or keys[pygame.K_w]:
+         y -= speed
+
+    if keys[pygame.K_LEFT] or keys[pygame.K_a]:
+         x -= speed
+
+    if keys[pygame.K_DOWN] or keys[pygame.K_s]:
+         y += speed
+
+    if keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+         x += speed
+
+    # Barriers to stop players from going out of bounds
+    if x < 0:
+         x = 0
+    if x > 800:
+         x = 800
+    if y < 150:
+         y = 150
+    if y > 600:
+         y = 600
+    screen.fill((10,20,150))
+
+    # Meteor level 1
+    if meteor_lvl == 1:
+        color = ("green")
+        size = 10
+        Meteor.drawing((color), size)
+
+        # Taking away heath from player
+        if taking_away_health < 1:
+            player_health -= 100
+            player_stats["Health: "] = player_health
+            taking_away_health += 1
+
+            # Check if player has less than 0 health
+            if player_health < 0:
+                player_health = 0
+    
+    # Meteor level 2
+    elif meteor_lvl == 2:
+        color = ("orange")
+        size = 20
+        Meteor.drawing((color), size)
+
+        # Taking away heath from player
+        if taking_away_health < 1:
+            player_health -= 200
+            player_stats["Health: "] = player_health
+            taking_away_health += 1
+            
+            # Check if player has less than 0 health
+            if player_health < 0:
+                player_health = 0
+
+    # Meteor level 3
+    elif meteor_lvl == 3:
+        color = ("red")
+        size = 30
+        Meteor.drawing((color), size)
+
+        # Taking away heath from player
+        if taking_away_health < 1:
+            player_health -= 1000
+            player_stats["Health: "] = player_health
+            taking_away_health += 1
+
+            # Check if player has less than 0 health
+            if player_health < 0:
+                player_health = 0
+
+    # Meteor level 4
+    elif meteor_lvl == 4:
+        color = ("purple")
+        size = 30
+        Meteor.drawing((color), size)
+
+        # Taking away heath from player
+        if taking_away_health < 1:
+            player_health -= 10000000000000
+            player_stats["Health: "] = player_health
+
+            # Check if player has less than 0 health
+            if player_health < 0:
+                player_health = 0
+
+    # Background grass
+    pygame.draw.rect(screen, (0,50,0), (0, 300, 10000, 1000000))
+
+    # Dinosaur drawing
+    pygame.draw.rect(screen, (0,100,0), (x - 180, y, 80, 45))
+    pygame.draw.rect(screen, (0,100,0), (x, y, 50, 100))
+
+    # Dinosaur legs
+    pygame.draw.rect(screen, (0,100,0), (x + 70, y, 50, 200))
+    pygame.draw.rect(screen, (0,100,0), (x - 70, y, 50, 200))
+
+    # Boots
+    if "Armor Boots" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x - 75, y + 150, 60, 50))
+        pygame.draw.rect(screen, (100,100,100), (x + 65, y + 150, 60, 50))
+
+    # Walking animation!!
+    if keys[pygame.K_UP] or keys[pygame.K_w] or keys[pygame.K_RIGHT] or keys[pygame.K_d]:
+        legs()
+    if keys[pygame.K_DOWN] or keys[pygame.K_s] or keys[pygame.K_LEFT] or keys[pygame.K_a]:
+        legs2()
+
+    # More dino drawing
+    # Neck
+    pygame.draw.rect(screen, (0,100,0), (x + 140, y - 3, 50, 80))
+    # Top of head
+    pygame.draw.rect(screen, (0,100,0), (x + 210, y - 70, 100, 80))
+    # Side of head
+    pygame.draw.rect(screen, (0,100,0), (x + 210, y - 50, 170, 80))
+    # Eye 1
+    pygame.draw.rect(screen, (0,0,0), (x + 220, y - 60, 20, 20))
+    # Eye 2
+    pygame.draw.rect(screen, (0,0,0), (x + 280, y - 60, 20, 20))
+
+    # Dino upgrades!!
+
+    # Helmet
+    if "Armor Helmet" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x + 220, y - 100, 80, 20))
+        pygame.draw.rect(screen, (100,100,100), (x + 210, y - 80, 100, 20))
+
+    # Chest plate
+    if "Armor Chestplate" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x, y, 50, 100))
+        pygame.draw.rect(screen, (100,100,100), (x + 140, y - 3, 50, 80))
+        pygame.draw.rect(screen, (100,100,100), (x - 180, y, 80, 45))
+
+    # Leggings
+    if "Armor Leggings" in inventory:
+        pygame.draw.rect(screen, (100,100,100), (x + 70, y, 50, 150))
+        pygame.draw.rect(screen, (100,100,100), (x - 70, y, 50, 150))
+
+    # Dinoprofen
+    if "Dinoprofen" in inventory:
+        pygame.draw.rect(screen, (209, 93, 21), (x + 350, y - 30, 50, 30))
+        pygame.draw.rect(screen, (255,255,255), (x + 400, y - 35, 15, 40))
+
+    # T-Rexanol
+    if "T-Rexanol" in inventory:
+        pygame.draw.rect(screen, (105, 21, 21), (x, y - 50, 50, 30))
+        pygame.draw.rect(screen, (255,255,255), (x + 50, y - 55, 15, 40))
+
+    # Shield
+    if "Shield" in inventory:
+        pygame.draw.circle(screen, (44,53,57), (x + 175, y + 100), 80 )
+        pygame.draw.circle(screen, (144,153,157), (x + 175, y + 100), 60 )
+    
+    # For boots, they are moved to line 228 for the leg animation. They are also in line 58 for the walking animation.
+
+    # Meteor getting bigger
+    big += 1
+
+     # FPS (Frames per second (60))
+    clock.tick(60)
+
+    # Check if player survived or died
+    if big > 500 and player_health <= 0 and meteor_lvl != 4:
+         screen.fill((0,0,0))
+         pygame.display.update()
+         print("You died!")
+
+         quit = input("QUIT? (Q): ")
+         quit = quit.upper()
+         if quit == "Q":
+            print("Thank you for playing!")
+            player_stats["Health: "] = 0
+            print("STATS:", player_stats)
+            print("DEATHS:", death)
+            break
+
+         # Some variables to reset and add
+         death += 1
+         taking_away_health = 0
+         big = 1
+         x = 220
+         y = 150
+
+         player_stats["Health: "] = player_health
+         screen.fill((0,0,0))
+
+         # Check for meteor level to give coins when players die
+         if meteor_lvl == 1:
+             player_coins += 10
+             print("+10 COINS")
+             player_stats["Wealth: "] = player_coins
+
+         elif meteor_lvl == 2:
+             player_coins += 20
+             print("+20 COINS")
+             player_stats["Wealth: "] = player_coins
+
+         elif meteor_lvl == 3:
+             player_coins += 30
+             print("+30 COINS")
+             player_stats["Wealth: "] = player_coins
+
+         else:
+             player_coins += 40
+             print("+40 COINS")
+             player_stats["Wealth: "] = player_coins
+             
+
+         # Shop
+         print("INVENTORY:", inventory)
+         print("PLAYER STATS:", player_stats)
+         input("PRESS ENTER TO CONTINUE: \n")
+         print("---SHOP---")
+         print(shop)
+         print("EVERYTHING COSTS 50 COINS AND WILL INCREASE YOUR HEALTH BY 50.")
+         buy = input("Would you like to buy anything (Y or N): ")
+         buy = buy.upper()
+
+         # Check if they want to buy anything
+
+         # If they have enough money
+         if buy == "Y" and player_coins >= 50 or buy == "YES" and player_coins >= 50:
+             
+             # Ask what to buy
+             what_to_buy = input("What would you like to buy: ")
+             what_to_buy = what_to_buy.title()
+
+             # Check if what they want is in shop
+             if what_to_buy in shop:
+                player_coins -= 50
+
+                # If it is, remove the item from the shop and move it to their inventory
+                shop.remove(what_to_buy)
+                inventory.append(what_to_buy)
+                print(inventory)
+             else:
+                print("Sorry, we couldn't find that item.")
+
+
+         elif buy == "Y" or buy == "YES":
+             print("Sorry, you do not have enough coins.")
+
+         # Resetting health
+         player_health = 100
+
+         # Check items in inventory
+         num_of_item = len(inventory)
+
+         # Add health for items
+         if "Armor Helmet" in inventory:
+             player_health += 50 # 150 health - beats lvl 1
+
+         if "Armor Chestplate" in inventory:
+             player_health += 50 # 200 health
+
+         if "Armor Leggings" in inventory:
+             player_health += 50 # 250 health - beats lvl 2
+
+         if "Armor Boots" in inventory:
+             player_health += 50 # 300 health
+
+         if "Shield" in inventory:
+             player_health += 50 # 350 health 
+
+         if "Dinoprofen" in inventory:
+             player_health += 50 # 350 health - beats lvl 3
+
+         if "T-Rexanol" in inventory:
+             player_health += 50 # 400 health - they are ready for the final boss!
+
+         
+         # Make the player levels, player has to be level 5 for the boss
+         print("")
+         # Level 1
+         if death == 5:
+            print("You have reached", death, "deaths!")
+            print("+1 LEVEL")
+            player_level += 1
+
+        # Level 2
+         elif death == 10:
+            print("You have reached", death, "deaths!")
+            print("+1 LEVEL")
+            player_level += 1
+
+        # Level 3
+         elif death == 15:
+            print("You have reached", death, "deaths!")
+            print("+1 LEVEL")
+            player_level += 1
+
+        # Level 4
+         elif death == 20:
+            print("You have reached", death, "deaths!")
+            print("+1 LEVEL")
+            player_level += 1
+
+         # Level 5
+         elif death == 25:
+            print("You have reached", death, "deaths!")
+            print("+1 LEVEL")
+            player_level += 1
+
+            # They are ready for the final boss!
+         input("PRESS ENTER TO CONTINUE: ")
+         player_stats["Level: "] = player_level
+
+        # Check if they are ready for the boss!
+         if num_of_item == 7 and player_level == 5 and meteor_lvl == 3:
+            print("YOU ARE READY FOR THE FINAL BOSS. \n")
+            meteor_lvl += 1
+            input("PRESS ENTER TO CONTINUE: ")
+
+    # Check if player is still alive
+    elif big > 500 and player_health > 0 and meteor_lvl != 3:
+        player_stats["Health: "] = player_health
+        screen.fill((0,0,0))
+        pygame.display.update()
+
+        print(f"You passed level {meteor_lvl}! Onto level {meteor_lvl + 1}!")
+        input("PRESS ENTER TO CONTINUE: ")
+        meteor_lvl += 1
+        taking_away_health = 0
+        big = 1
+        x = 220
+        y = 150
+    
+    # Final boss death!
+    elif meteor_lvl == 4 and big > 500 and player_health == 0:
+        player_stats["Health: "] = player_health
+        print("YOU DIED!")
+
+        print("You tried your hardest and beat 3 meteors. However, in the end, \nyou're still just a dinosaur bound to go extinct.")
+        print("THE END \n")
+        print("STATS:", player_stats)
+        print("DEATHS:", death)
+
+        # Dinosaur drawing
+        bones = (181, 159, 130)
+        still_x = 300
+        still_y = 200
+        
+        screen.fill((143, 130, 113))
+        # Background floor
+        pygame.draw.rect(screen, (71, 40, 31), (0, 500, 10000, 1000000))
+        pygame.draw.rect(screen, (115, 71, 39), (150, 400, 400, 100))
+
+        # Dino
+        pygame.draw.rect(screen, (bones), (still_x - 180, still_y, 80, 45))
+        pygame.draw.rect(screen, (bones), (still_x, still_y, 50, 100))
+        # Dinosaur legs
+        pygame.draw.rect(screen, (bones), (still_x + 70, still_y, 50, 200))
+        pygame.draw.rect(screen, (bones), (still_x - 70, still_y, 50, 200))
+        # Neck
+        pygame.draw.rect(screen, (bones), (still_x + 140, still_y - 3, 50, 80))
+        # Top of head
+        pygame.draw.rect(screen, (bones), (still_x + 210, still_y - 70, 100, 80))
+        # Side of head
+        pygame.draw.rect(screen, (bones), (still_x + 210, still_y - 50, 170, 80))
+        # Eye 1
+        pygame.draw.rect(screen, (143, 130, 113), (still_x + 220, still_y - 60, 20, 20))
+        # Eye 2
+        pygame.draw.rect(screen, (143, 130, 113), (still_x + 280, still_y - 60, 20, 20))
+        pygame.display.update()
+        input("PRESS ENTER TO QUIT: ")
+        break
+
+    # Displaying pygame 
+    pygame.display.flip()
